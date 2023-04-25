@@ -1,22 +1,36 @@
 import React from "react";
-import { SafeAreaView, View, Text, StyleSheet, Image, Dimensions} from "react-native";
+import { SafeAreaView, View, StyleSheet, Image, Dimensions, Platform, KeyboardAvoidingView} from "react-native";
 import Input from "../Components/Input";
+import {Formik} from "formik";
 import Button from "../Components/Button";
 
 
 const LoginScreen = () => {
 
+  function handleLogin(values:any){
+
+    console.log(values);
+
+  }
+
+
   return (
 
     <SafeAreaView style={style.container}>
+
       <View style={style.logo_container}>
         <Image style={style.logo} source={require('../Assets/shop.icon.png')} />
       </View>
-      <View style={style.body_container}>
-        <Input placeholder='Enter User Name' />
-        <Input placeholder='Enter Password'/>
-        <Button title='Login in'/>
-      </View>
+      <Formik initialValues={{username:'', password:''}} onSubmit={values => handleLogin(values)} >
+        {({handleSubmit, handleChange,values}) =>
+          (<View style={style.body_container}>
+        <Input placeholder='Enter User Name' value={values.username} onType={handleChange('username')} />
+        <Input placeholder='Enter Password' value={values.password} onType={handleChange('password')}/>
+        <Button title='Login in' onTouched={handleSubmit} />
+      </View>)}
+
+      </Formik>
+
     </SafeAreaView>
 
   );
