@@ -5,9 +5,18 @@ import {Formik} from "formik";
 import Button from "../Components/Button";
 
 
-const LoginScreen = () => {
+
+
+const LoginScreen = ({navigation}:any) => {
 
   function handleLogin(values:any){
+
+    if(values.password === "murat" && values.username === "murat"){
+
+       navigation.navigate('MainMenu');
+
+    }
+
 
     console.log(values);
 
@@ -24,8 +33,9 @@ const LoginScreen = () => {
       <Formik initialValues={{username:'', password:''}} onSubmit={values => handleLogin(values)} >
         {({handleSubmit, handleChange,values}) =>
           (<View style={style.body_container}>
-        <Input placeholder='Enter User Name' value={values.username} onType={handleChange('username')} />
-        <Input placeholder='Enter Password' value={values.password} onType={handleChange('password')}/>
+        <Input placeholder='Enter User Name' value={values.username} onType={handleChange('username')} iconName='account' isSecure={false} />
+
+        <Input placeholder='Enter Password' value={values.password} onType={handleChange('password')} iconName='key' isSecure={true}/>
         <Button title='Login in' onTouched={handleSubmit} />
       </View>)}
 

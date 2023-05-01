@@ -10,9 +10,16 @@ export default StyleSheet.create({
     maxHeight:55,
     backgroundColor: "white",
     borderRadius: 13,
-    alignItems: "center",
-    alignSelf:'center'
-  }
+    alignSelf:'center',
+    flexDirection:"row",
+    borderBottomWidth: 1,
+    borderColor: '#000',
+
+  },
+  input: {
+   flex:1,
+
+  },
 
 
 });
