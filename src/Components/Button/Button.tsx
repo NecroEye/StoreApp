@@ -1,14 +1,15 @@
 import React from 'react';
-import {Text, TouchableOpacity} from "react-native";
+import {ActivityIndicator, Text, TouchableOpacity} from "react-native";
 import ButtonStyle from "./Button.style";
 
-function Button({title, onTouched}:any){
+function Button({title, onTouched}: any) {
 
-  return(
-     <TouchableOpacity style={ButtonStyle.container} onPress={onTouched}>
-       <Text style={ButtonStyle.title}>{title}</Text>
-     </TouchableOpacity>
-  );
+    return (
+        <TouchableOpacity style={ButtonStyle.container} onPress={onTouched} >
+            <Text style={ButtonStyle.title}>{title}</Text>
+
+        </TouchableOpacity>
+    );
 
 }
 

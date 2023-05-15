@@ -1,17 +1,25 @@
 import React from "react";
-import { SafeAreaView, View, StyleSheet, Image, Dimensions, Platform, KeyboardAvoidingView} from "react-native";
+import {SafeAreaView, View, StyleSheet, Image, Dimensions, Platform, KeyboardAvoidingView, Alert} from "react-native";
 import Input from "../Components/Input";
 import {Formik} from "formik";
 import Button from "../Components/Button";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
 const LoginScreen = ({navigation}:any) => {
 
+
+
   function handleLogin(values:any){
 
+
     if(values.password === "murat" && values.username === "murat"){
+
+
+       // @ts-ignore
+      AsyncStorage.setItem('@user',values.username);
+      AsyncStorage.setItem('@pass', values.password);
 
        navigation.navigate('MainMenu');
 
@@ -23,6 +31,7 @@ const LoginScreen = ({navigation}:any) => {
   }
 
 
+
   return (
 
     <SafeAreaView style={style.container}>
@@ -30,7 +39,8 @@ const LoginScreen = ({navigation}:any) => {
       <View style={style.logo_container}>
         <Image style={style.logo} source={require('../Assets/shop.icon.png')} />
       </View>
-      <Formik initialValues={{username:'', password:''}} onSubmit={values => handleLogin(values)} >
+      <Formik initialValues={{username:AsyncStorage.getItem("@user") === null ? '' : AsyncStorage.getItem('@user'),
+        password:''}} onSubmit={values => handleLogin(values)} >
         {({handleSubmit, handleChange,values}) =>
           (<View style={style.body_container}>
         <Input placeholder='Enter User Name' value={values.username} onType={handleChange('username')} iconName='account' isSecure={false} />
